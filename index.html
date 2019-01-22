@@ -49,7 +49,7 @@
         }).catch(function(err) {
             console.log('An error occurred while retrieving token. ', err);
         });
-        messaging.onmessage(function (payload) {
+        messaging.onMessage(function (payload) {
             console.log("payload", payload);
         });
     }
