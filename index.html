@@ -3,8 +3,6 @@
 <body>
 
 
-
-
 <!------------------- Firebase App is always required and must be first ---------------------->
 
 <script src="https://www.gstatic.com/firebasejs/5.7.2/firebase-app.js"></script>
@@ -28,18 +26,14 @@
 
 
     messaging.requestPermission().then(function() {
-
         console.log('Notification permission granted.');
-        // TODO(developer): Retrieve an Instance ID token for use with FCM.
-        // ...
         getToken();
     }).catch(function(err) {
         console.log('Unable to get permission to notify.', err);
     });
 
+
     function getToken(){
-        // Get Instance ID token. Initially this makes a network call, once retrieved
-        // subsequent calls to getToken will return from cache.
         messaging.getToken().then(function(currentToken) {
             if (currentToken) {
                 console.log('token: ', currentToken);
@@ -52,14 +46,22 @@
     }
 
 
+    messaging.onTokenRefresh(function() {
+        getToken();
+    });
+
+
+
+    messaging.onMessage(function(payload) {
+        console.log('Message received. ', payload);
+    });
 </script>
-<!------------------- Firebase App is always required and must be first ---------------------->
 
 
 
 
 
-<script type="application/javascript">
+<!--<script type="application/javascript">
     function listarUsuarios(){
         var httpRequest = new XMLHttpRequest();
         httpRequest.open('GET', 'http://localhost/www/Vectis/webservice/index.php?method=listar-usuarios', true);
@@ -102,7 +104,7 @@
         };*/
 
     }
-</script>
+</script>-->
 
 <div class="container" style="background: #f8f9fa;">
 

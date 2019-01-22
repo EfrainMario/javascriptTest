@@ -6,23 +6,17 @@ importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
-firebase.initializeApp({
-    'messagingSenderId': 'AAAAY49qiR0:APA91bH-v6CqTtPdA-F3U9afN4eGBTdXpLyPc-XtUkIL5SAzQj-MFdIh-Ed3f7kJUVTcPEgwiINX7ahbX9W5yswdOc4bqiAP0_p6Ftqf03NqzUPJJ_r3KLqC9QmfrBAMlWBN6jPN6uEg'
-});
+
+var config = {
+    apiKey: "AIzaSyA9dV6cEGkNqpn0ueJ2uT7aLZm_zLyw_k0",
+    authDomain: "messageapp-34d03.firebaseapp.com",
+    databaseURL: "https://messageapp-34d03.firebaseio.com",
+    projectId: "messageapp-34d03",
+    storageBucket: "messageapp-34d03.appspot.com",
+    messagingSenderId: "427607886109"
+};
+firebase.initializeApp(config);
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
 const messaging = firebase.messaging();
-
-messaging.setBackgroundMessageHandler(function(payload) {
-    console.log('[firebase-messaging-sw.js] Received background message ', payload);
-    // Customize notification here
-    var notificationTitle = 'Background Message Title';
-    var notificationOptions = {
-        body: 'Background Message body.',
-        icon: '/firebase-logo.png'
-    };
-
-    return self.registration.showNotification(notificationTitle,
-        notificationOptions);
-});
